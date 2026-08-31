@@ -10,11 +10,31 @@ function updateDisplay() {
 }
 
 function inputDigit(digit) {
+  if (displayValue === 'Error') {
+    displayValue = '0';
+  }
+
   if (waitingForSecondOperand) {
     displayValue = digit;
     waitingForSecondOperand = false;
   } else {
     displayValue = displayValue === '0' ? digit : displayValue + digit;
+  }
+}
+
+function inputDecimal() {
+  if (displayValue === 'Error') {
+    displayValue = '0';
+  }
+
+  if (waitingForSecondOperand) {
+    displayValue = '0.';
+    waitingForSecondOperand = false;
+    return;
+  }
+
+  if (!displayValue.includes('.')) {
+    displayValue = displayValue === '0' ? '0.' : displayValue + '.';
   }
 }
 
@@ -68,6 +88,12 @@ document.querySelector('.buttons').addEventListener('click', (event) => {
 
   if (target.classList.contains('clear')) {
     resetCalculator();
+    updateDisplay();
+    return;
+  }
+
+  if (target.classList.contains('decimal')) {
+    inputDecimal();
     updateDisplay();
     return;
   }

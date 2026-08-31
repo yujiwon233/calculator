@@ -62,7 +62,11 @@ button.clear {
 }
 
 button.zero {
-  grid-column: span 3;
+  grid-column: span 2;
+}
+
+button.decimal {
+  background-color: #2a2e3d;
 }
 
 button.operator {
